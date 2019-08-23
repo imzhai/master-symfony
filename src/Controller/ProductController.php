@@ -16,8 +16,8 @@ class ProductController extends AbstractController
     public function create(Request $request)
     {
         $product = new Product();
-        $form = $this->createForm(ProductType::class, $product);
-        
+        $form = $this->createForm(ProductType::class, $product); 
+
         $form->handleRequest($request);
 
         // Quand le formulaire est valide
