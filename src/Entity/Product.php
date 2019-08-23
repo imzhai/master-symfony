@@ -33,6 +33,7 @@ class Product
      */
     private $price;
 
+    
     public function getId(): ?int
     {
         return $this->id;
