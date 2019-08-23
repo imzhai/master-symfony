@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h2> Liste des produits</h2>
+
+        <ul>
+            {% for product in products %}
+                <li> {{product.id}} : {{product.name}} </li>
+            {% endfor %}
+        </ul>
+
+        <h6> Un produit par l'id : {{product2.name}} </h6>
+
+        <h6> Un produit par le 'name': {{product3.name}} </h6>
+
+        <h5> Un produit par le montant (ici 1500€) :</h5>
+        <ul>
+        {% for product in products1500 %}
+            <li> {{product.id}} : {{product.name}} </li>
+        {% endfor %}
+        </ul>
+       
+    </div>
+{% endblock %}
