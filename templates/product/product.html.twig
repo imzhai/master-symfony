@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container mt-5">
+
+        <h2> Liste des produits</h2>
+            <div class="row">
+                {% for product in products %}
+                    <div class="col-4">
+                        <h1> {{product.name}} </h1>
+                        <p> {{product.description}} </p>
+                        <p> {{product.price}} € </p>
+                        <a class="btn btn-secondary" href="{{path('product_show', {id: product.id})}}">Voir le produit</a>                        
+                        <a class="btn btn-warning" href="{{path('product_edit', {id: product.id})}}">Modifier le produit</a>
+                        <a class="btn btn-danger" href="{{path('product_delete', {id: product.id})}}">supprimer le produit</a>
+
+                    </div>
+                {% endfor %}
+                
+            
+            </div>
+       
+    </div>
+{% endblock %}
