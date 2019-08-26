@@ -47,4 +47,62 @@ class ProductRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findAllGreaterThanPrice($price): array
+    {
+        // Requête avec le queryBuilder
+        $qb = $this->createQueryBuilder('p'); // SELECT * FROM product...
+        $qb->andWhere('p.price > :price'); // WHERE p.price > :price
+        $qb->setParameter('price', $price); // est égal au bindValue
+
+        // if (??????){
+        //     $qb->andWhere('....'); // AND....
+        //     $qb->setParameter('price', $price);
+        // }
+
+        $qb->orderBy('p.price', 'ASC'); // ORDER BY price ASC
+
+        //debug de la requête
+        //dump($qb->getQuery()->getSql());
+
+        return $qb->getQuery()->getResult(); // Execute le requête
+    }
+
+
+    /**
+     *  Permet de récupérer un seul produit
+     */
+    public function findOneGreaterThanPrice($price): Product
+    {
+        // Requête avec le queryBuilder
+        $qb = $this->createQueryBuilder('p') // SELECT * FROM product...
+                ->andWhere('p.price > :price') // WHERE p.price > :price
+                ->setParameter('price', $price) // est égal au bindValue
+                ->orderBy('p.price', 'DESC') // ORDER BY price ASC
+                ->setMaxResults(1) // Limit 1
+                ->getQuery();
+    
+        return $qb->getOneOrNullResult(); // Execute le requête
+        //debug de la requête
+        //dump($qb->getQuery()->getSql());
+
+        
+    }
+
+
+    /**
+     * Permer de retourner les 4 produits les plus chers de la base de données
+     * Cette méthode devra être appelée sur notre page d'accueil afin d'afficher les 4 produits
+     */
+
+     public function findMoreExpensive(int $number = 4)
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->orderBy('p.price', 'DESC')
+            ->setMaxResults($number)
+            ->getQuery();
+
+        return $qb->getResult();    
+
+    }
 }

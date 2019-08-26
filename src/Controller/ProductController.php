@@ -11,6 +11,20 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ProductController extends AbstractController
 {
+        /** 
+     * @Route ("/", name="accueil" ) 
+     */
+    public function accueil()
+    {
+        // On récupère les produits les plus chers
+        $products = $this->getDoctrine()->getRepository(Product::class)->findMoreExpensive(8);
+
+        return $this->render('product/home.html.twig', [
+            'products' => $products,
+        ]);
+    }  
+
+
     /**
      * @Route("/product/create", name="product_create")
      */
@@ -54,22 +68,26 @@ class ProductController extends AbstractController
         // dump($products);
 
         // Récupérer le produit avec l'id 3
-        $product2 = $productRepository->find(3);
+        $product2 = $productRepository->find(255);
 
         // Récupérer le produit qui se nomme iPhone X
 
         // $productRepository->findOneByName('iPhone X');
-        $product3 = $productRepository->findOneBy(['name' => 'iPhone X']);
+        $product3 = $productRepository->findOneBy(['name' => 'Un produit de Dinguo']);
 
         // Récupérer tous les produits qui coutent 1500 euros exacement
-        $products1500 = $productRepository->findByPrice(1500);
+        $products1500 = $productRepository->findByPrice(1209);
+
+        // Récupérer le produit le plus cher
+        $productExpensive = $productRepository->findOneGreaterThanPrice(1400);
 
 
         return $this->render('product/demo.html.twig', [
             'products' => $products,
             'product2' => $product2,
             'product3' => $product3,
-            'products1500' => $products1500
+            'products1500' => $products1500,
+            'product_expensive' => $productExpensive,
         ]);
     }
 
@@ -154,6 +172,8 @@ class ProductController extends AbstractController
         //redirection vers la liste
         return $this->redirectToRoute('product_list');
     }
+
+
 
 
 

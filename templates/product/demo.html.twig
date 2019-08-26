@@ -10,9 +10,13 @@
             {% endfor %}
         </ul>
 
+    {% if product2 %}
         <h6> Un produit par l'id : {{product2.name}} </h6>
+    {% endif %}
 
         <h6> Un produit par le 'name': {{product3.name}} </h6>
+
+
 
         <h5> Un produit par le montant (ici 1500€) :</h5>
         <ul>
@@ -20,6 +24,8 @@
             <li> {{product.id}} : {{product.name}} </li>
         {% endfor %}
         </ul>
+
+        <h6> Le produit le plus cher : {{product_expensive.name}} </h6>
        
     </div>
 {% endblock %}
