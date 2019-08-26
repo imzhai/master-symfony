@@ -14,6 +14,10 @@ class ProductType extends AbstractType
         $builder
             ->add('name')
             ->add('slug')
+            ->add('user', null, [
+                // Le choice label permet de définir la propriété à afficher de l'objet User
+                'choice_label' => 'username'
+            ])
             ->add('description')
             ->add('price')            
         ;

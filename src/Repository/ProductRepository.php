@@ -105,4 +105,20 @@ class ProductRepository extends ServiceEntityRepository
         return $qb->getResult();    
 
     }
+
+
+    public function findAllWithUser()
+    {
+        $qb = $this->createQueryBuilder('p')
+            // leftJoin renvoie tous les produits même ceux sans user
+            ->leftJoin('p.user', 'u')
+            // innerJoin ou join renvoie uniquement les produits avec un user
+            // ->join('p.user', 'u')
+            ->addSelect('u')
+            ->getQuery();
+        return $qb->getResult();
+    }
+
+
+
 }
