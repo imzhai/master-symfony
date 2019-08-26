@@ -30,6 +30,11 @@ class ProductController extends AbstractController
         $entityManager->persist($product);
         // Execute la requête (INSERT...)
         $entityManager->flush();
+
+        $this->addFlash('success', 'le produit a été créé !');
+
+        return $this->redirectToRoute('products');
+
         }
                 
         return $this->render('product/create.html.twig', [
