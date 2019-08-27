@@ -22,6 +22,11 @@ class ProductType extends AbstractType
                 // Le choice label permet de définir la propriété à afficher de l'objet User
                 'choice_label' => 'name'
             ])
+            ->add('tags', null, [
+                // Le choice label permet de définir la propriété à afficher de l'objet User
+                'choice_label' => 'name',
+                'expanded' => 'true', // On veut des checkboxes au lieu d'un select multiple
+            ])
             ->add('description')
             ->add('price')            
         ;

@@ -5,6 +5,8 @@ namespace App\DataFixtures;
 use App\Entity\User;
 use App\Entity\Product;
 use App\Entity\Category;
+use App\Entity\Tag;
+
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
@@ -26,10 +28,18 @@ class AppFixtures extends Fixture
         $categories = []; // Le tableau vas nous aider à stocker les instances des user
         for($i =0; $i<10; $i++){
             $category = new Category();
-            $category->setName('Caterory '.$i);
+            $category->setName('Category '.$i);
             $manager->persist($category);
             $categories[] = $category; // On met l'instance de côté
         }
+
+        // Créer les tags
+        for($i =0; $i<10; $i++){
+            $tag = new Tag();
+            $tag->setName('Tag '.$i);
+            $manager->persist($tag);
+        }
+                    
 
         // Créer produit
         for($i = 0; $i <30; $i++){
